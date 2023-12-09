@@ -409,7 +409,7 @@ export class NgFlowchartStepComponent<T = any>
   getNodeTreeWidth(stepGap: number) {
     const currentNodeWidth = this.nativeElement.getBoundingClientRect().width;
 
-    if (!this.hasChildren()) {
+    if (!this.hasChildren() || this.collapsed) {
       return this.nativeElement.getBoundingClientRect().width;
     }
 
@@ -429,7 +429,7 @@ export class NgFlowchartStepComponent<T = any>
   getNodeTreeHeight(stepGap: number) {
     const currentNodeHeight = this.nativeElement.getBoundingClientRect().height;
 
-    if (!this.hasChildren()) {
+    if (!this.hasChildren() || this.collapsed) {
       return this.nativeElement.getBoundingClientRect().height;
     }
 

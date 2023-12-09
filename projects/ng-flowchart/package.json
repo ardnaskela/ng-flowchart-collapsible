@@ -1,6 +1,6 @@
 {
   "name": "@ardnaskela/ng-flowchart-collapsible",
-  "version": "1.0.0-beta.29",
+  "version": "1.0.0-beta.31",
   "license": "Apache-2.0",
   "peerDependencies": {
     "@angular/common": "14 - 16",
