@@ -1,5 +1,5 @@
 {
-  "name": "@joelwenzel/ng-flowchart",
+  "name": "@ardnaskela/ng-flowchart-collapsible",
   "version": "1.0.0-beta.29",
   "license": "Apache-2.0",
   "peerDependencies": {
@@ -10,7 +10,7 @@
     "tslib": "^2.0.0"
   },
   "repository": {
-    "url": "https://github.com/joel-wenzel/ng-flowchart/tree/master/projects/ng-flowchart"
+    "url": "https://github.com/ardnaskela/ng-flowchart-collapsible"
   },
   "ngPackage": {
     "lib": {
