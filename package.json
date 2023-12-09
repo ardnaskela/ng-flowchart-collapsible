@@ -1,5 +1,5 @@
 {
-  "name": "ng-flowchart",
+  "name": "ng-flowchart-collapsible",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,6 @@
     "prettier": "npx prettier --write .",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^14.1.0",
     "@angular/common": "^14.1.0",
