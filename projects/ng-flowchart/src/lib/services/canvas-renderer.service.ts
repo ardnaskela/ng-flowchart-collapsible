@@ -75,6 +75,16 @@ export class CanvasRendererService {
     return this.options.options.stepGap;
   }
 
+  private hideRecursively = node => {
+    node.hide();
+    if (node.children) node.children.forEach(this.hideRecursively);
+  };
+
+  private showRecursively = node => {
+    node.show();
+    if (node.children) node.children.forEach(this.showRecursively);
+  };
+
   private renderVerticalChildTree(
     rootNode: NgFlowchartStepComponent,
     rootRect: Partial<DOMRect>,
@@ -84,6 +94,15 @@ export class CanvasRendererService {
 
     if (!rootNode.hasChildren()) {
       return;
+    }
+
+    if (rootNode.collapsed) {
+      // If the node is collapsed, hide its children and return
+      rootNode.children.forEach(this.hideRecursively);
+      return;
+    } else {
+      // If the node is not collapsed, show its children
+      rootNode.children.forEach(this.showRecursively);
     }
 
     const rootBottom =
@@ -152,6 +171,15 @@ export class CanvasRendererService {
 
     if (!rootNode.hasChildren()) {
       return;
+    }
+
+    if (rootNode.collapsed) {
+      // If the node is collapsed, hide its children and return
+      rootNode.children.forEach(this.hideRecursively);
+      return;
+    } else {
+      // If the node is not collapsed, show its children
+      rootNode.children.forEach(this.showRecursively);
     }
 
     const rootRight =

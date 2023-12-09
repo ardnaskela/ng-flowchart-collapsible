@@ -13,6 +13,8 @@ import { NgFlowchart } from '../model/flow.model';
 import { NgFlowchartCanvasService } from '../ng-flowchart-canvas.service';
 import { NgFlowchartPadArrowComponent } from '../ng-flowchart-pad-arrow/ng-flowchart-pad-arrow.component';
 import { DropDataService } from '../services/dropdata.service';
+import { element } from 'protractor';
+import { NgFlowchartConnectorComponent } from '../ng-flowchart-connector/ng-flowchart-connector.component';
 
 @Component({
   selector: 'ng-flowchart-connector-pad',
@@ -105,6 +107,20 @@ export class NgFlowchartConnectorPadComponent implements AfterViewInit {
       { injector: injector }
     );
     this.element.nativeElement.appendChild(this.arrow.location.nativeElement);
+  }
+
+  hide() {
+    this.element.nativeElement.style.display = 'none';
+    if (this.arrow) {
+      this.arrow.instance.hide();
+    }
+  }
+
+  show() {
+    this.element.nativeElement.style.display = 'block';
+    if (this.arrow) {
+      this.arrow.instance.show();
+    }
   }
 
   private dragMove(e: MouseEvent, skipPan?: boolean) {

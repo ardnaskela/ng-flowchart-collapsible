@@ -59,6 +59,14 @@ export class NgFlowchartPadArrowComponent implements OnInit, AfterViewInit {
     this.opacity = 1;
   }
 
+  hide() {
+    this.arrow.nativeElement.style.display = 'none';
+  }
+
+  show() {
+    this.arrow.nativeElement.style.display = 'block';
+  }
+
   private updatePath() {
     if (!this.arrow?.nativeElement) {
       return;

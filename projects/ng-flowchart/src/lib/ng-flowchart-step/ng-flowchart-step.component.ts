@@ -95,6 +95,48 @@ export class NgFlowchartStepComponent<T = any>
     }
   }
 
+  // Add the collapsed property
+  collapsed = false;
+
+  toggleCollapse() {
+    if (!this.hasChildren()) {
+      return;
+    }
+    this.collapsed = !this.collapsed;
+    this.toggleChildren(this, this.collapsed);
+    this.canvas.reRender();
+  }
+
+  toggleChildren(node, state: boolean) {
+    if (!node.children) {
+      return;
+    }
+    node.children.forEach(child => {
+      child.collapsed = state;
+      this.toggleChildren(child, state);
+    });
+  }
+
+  hide() {
+    this.nativeElement.style.display = 'none';
+    if (this.arrow) {
+      this.arrow.instance.hide();
+    }
+    if (this.connectorPad) {
+      this.connectorPad.instance.hide();
+    }
+  }
+
+  show() {
+    this.nativeElement.style.display = 'block';
+    if (this.arrow) {
+      this.arrow.instance.show();
+    }
+    if (this.connectorPad) {
+      this.connectorPad.instance.show();
+    }
+  }
+
   //could potentially try to make this abstract
   @ViewChild('canvasContent')
   protected view: ElementRef;
@@ -435,6 +477,7 @@ export class NgFlowchartStepComponent<T = any>
       id: this.id,
       type: this.type,
       data: this.data,
+      collapsed: this.collapsed,
       children: this.hasChildren()
         ? this._children.map(child => {
             return child.toJSON();

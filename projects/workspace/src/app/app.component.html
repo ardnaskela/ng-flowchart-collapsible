@@ -77,7 +77,7 @@
         class="card"
         [attr.name]="data.data.name"
         #card
-        (click)="onDelete(data.id)">
+        (dblclick)="toggleCollapse(data.id)">
         <span>{{ data.data.name }}</span>
       </div>
     </ng-template>

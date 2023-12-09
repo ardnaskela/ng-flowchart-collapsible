@@ -11,6 +11,7 @@ import { CanvasRendererService } from './services/canvas-renderer.service';
 import { DropDataService as DragService } from './services/dropdata.service';
 import { OptionsService } from './services/options.service';
 import { StepManagerService } from './services/step-manager.service';
+import { element } from 'protractor';
 
 type DropResponse = {
   added: boolean;
@@ -285,10 +286,10 @@ export class NgFlowchartCanvasService {
     this.renderer.render(this.flow, pretty);
   }
 
-  async upload(root: any, connectors: any) {
+  async upload(root: any, connectors: any, collapseAfter?: number) {
     await new Promise(res => setTimeout(res));
     this.cdr.markForCheck();
-    await this.uploadNode(root);
+    await this.uploadNode(root, null, collapseAfter);
     this.uploadConnectors(connectors);
     this.reRender(true);
   }
@@ -307,7 +308,9 @@ export class NgFlowchartCanvasService {
 
   private async uploadNode(
     node: any,
-    parentNode?: NgFlowchartStepComponent
+    parentNode?: NgFlowchartStepComponent,
+    collapseAfter?: number,
+    currentLevel: number = 0
   ): Promise<NgFlowchartStepComponent> {
     if (!node) {
       // no node to upload when uploading empty nested flow
@@ -315,6 +318,10 @@ export class NgFlowchartCanvasService {
     }
 
     let comp = await this.createStepFromType(node.id, node.type, node.data);
+    comp.instance.collapsed = false;
+    if (collapseAfter !== undefined && currentLevel >= collapseAfter) {
+      comp.instance.collapsed = true;
+    }
     if (!parentNode) {
       this.setRoot(comp.instance);
       this.renderer.renderRoot(comp, null);
@@ -325,7 +332,12 @@ export class NgFlowchartCanvasService {
 
     for (let i = 0; i < node.children.length; i++) {
       let child = node.children[i];
-      let childComp = await this.uploadNode(child, comp.instance);
+      let childComp = await this.uploadNode(
+        child,
+        comp.instance,
+        collapseAfter,
+        currentLevel + 1
+      );
       comp.instance.children.push(childComp);
       childComp.setParent(comp.instance, true);
     }

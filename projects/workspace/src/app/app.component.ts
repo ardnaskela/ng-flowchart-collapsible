@@ -39,7 +39,7 @@ export class AppComponent implements AfterViewInit {
   normalStepTemplate: TemplateRef<any>;
 
   sampleJson =
-    '{"root":{"id":"s1674421266194","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[{"id":"s1674421267975","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[{"id":"s1674421269738","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]},{"id":"s1674421268826","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]},"connectors":[{"startStepId":"s1674421269738","endStepId":"s1674421268826"}]}';
+    '{"root":{"id":"s1674421266194","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[{"id":"s1674421267975","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[{"id":"s1674421269738","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]},{"id":"s1674421268826","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]}}';
 
   items = [
     {
@@ -147,7 +147,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   showUpload() {
-    this.canvas.getFlow().upload(this.sampleJson);
+    this.canvas.getFlow().upload(this.sampleJson, 1);
   }
 
   showFlowData() {
@@ -185,6 +185,10 @@ export class AppComponent implements AfterViewInit {
     this.canvas.setOrientation(
       event.target.checked ? 'HORIZONTAL' : 'VERTICAL'
     );
+  }
+
+  toggleCollapse(id) {
+    this.canvas.getFlow().getStep(id).toggleCollapse();
   }
 
   onDelete(id) {

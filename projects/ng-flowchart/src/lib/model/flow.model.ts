@@ -26,13 +26,13 @@ export namespace NgFlowchart {
      * Create a flow and render it on the canvas from a json string
      * @param json The json string of the flow to render
      */
-    async upload(json: string | object): Promise<void> {
+    async upload(json: string | object, collapseAfter?: number): Promise<void> {
       let jsonObj = typeof json === 'string' ? JSON.parse(json) : json;
       let root: any = jsonObj.root;
       let connectors: any = jsonObj.connectors;
       this.clear();
 
-      await this.canvas.upload(root, connectors);
+      await this.canvas.upload(root, connectors, collapseAfter);
     }
 
     /**
