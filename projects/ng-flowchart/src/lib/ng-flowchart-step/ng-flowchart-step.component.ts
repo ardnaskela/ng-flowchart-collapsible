@@ -107,7 +107,7 @@ export class NgFlowchartStepComponent<T = any>
     this.canvas.reRender();
   }
 
-  toggleChildren(node, state: boolean) {
+  private toggleChildren(node, state: boolean) {
     if (!node.children) {
       return;
     }

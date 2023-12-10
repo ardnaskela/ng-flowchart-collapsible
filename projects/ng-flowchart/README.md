@@ -1,3 +1,15 @@
+# NgFlowchart Collapsible fork
+
+This is a fork of ng-flowchart library that adds a possibility to collapse children nodes recursively without impacting the underlying structure.
+Here's what was added to the original library:
+
+- NgFlowchartStepComponent has a new "collapsed" property and toggleCollapse() method that changes the collapsed state of the step and the underlying steps recursively. Bear in mind that the first collapsed element is visible, since it's the underlying tree that is collapsed (in the demo provided toggleCollapse() is triggered on double click)
+- "upload" method of NgFlowchart.Flow now accepts an optional third parameter collapseAfter (number) which specifies the default level at which the nodes should be collapsed upon loading
+
+This fork was created to meet a need of a flowchart I'm working on which became so large, it took 30s to load and was impossible to navigate.
+
+Known issues: manual connectors are not hidden properly upon initial load (on toggleCollapse() they are, though)
+
 # NgFlowchart
 
 [Demo](https://joelwenzel.com/projects/flowchart?palette=standard) | [Npm](https://www.npmjs.com/package/@joelwenzel/ng-flowchart) | [Getting started](#getting-started) | [Wiki](https://github.com/joel-wenzel/ng-flowchart/wiki/NgFlowchart)
@@ -18,7 +30,7 @@ Inspired by [Alyssa X Flowy](https://github.com/alyssaxuu/flowy)
 
 ## Supported Angular versions
 
-- Angular 10.2.0+
+- Angular 14+
 
 ## Change Log
 
