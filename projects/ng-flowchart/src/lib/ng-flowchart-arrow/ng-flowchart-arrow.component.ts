@@ -75,11 +75,11 @@ export class NgFlowchartArrowComponent implements OnInit, AfterViewInit {
   }
 
   hide() {
-    this.arrow.nativeElement.style.display = 'none';
+    if (this.arrow) this.arrow.nativeElement.style.display = 'none';
   }
 
   show() {
-    this.arrow.nativeElement.style.display = 'block';
+    if (this.arrow) this.arrow.nativeElement.style.display = 'block';
   }
 
   private updatePath() {
